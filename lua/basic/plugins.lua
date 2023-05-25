@@ -23,10 +23,25 @@ packer.startup({
         }
 
         -- 主题
+        -- use {
+        --     "rebelot/kanagawa.nvim",
+        --     config = function()
+        --         require("conf.kanagawa")
+        --     end
+        -- }
+
         use {
-            "rebelot/kanagawa.nvim",
-            config = function ()
-                require("conf.kanagawa")
+            "catppuccin/nvim",
+            as = "catppuccin",
+            config = function()
+                require("conf.catppuccin")
+            end
+        }
+
+        use {
+            'nvim-tree/nvim-web-devicons',
+            config = function()
+                require("conf.nvim-web-devicons")
             end
         }
 
@@ -129,6 +144,62 @@ packer.startup({
             "kevinhwang91/nvim-hlslens",
             config = function()
                 require("conf.nvim-hlslens")
+            end
+        }
+
+        -- 自动匹配括号
+        use {
+            "windwp/nvim-autopairs",
+            config = function()
+                require("conf.nvim-autopairs")
+            end
+        }
+
+        -- 自动恢复光标位置
+        use {
+            "ethanholz/nvim-lastplace",
+            config = function()
+                require("conf.nvim-lastplace")
+            end
+        }
+
+        -- 灯泡提示代码行为
+        use {
+            "kosayoda/nvim-lightbulb",
+            config = function()
+                require("conf.nvim-lightbulb")
+            end
+        }
+
+        -- 代码注释
+        use {
+            "numToStr/Comment.nvim",
+            config = function()
+                require("conf.Comment")
+            end
+        }
+
+        -- 自动会话管理
+        use {
+            "rmagatti/auto-session",
+            config = function()
+                require("conf.auto-session")
+            end
+        }
+
+        -- view tree
+        use {
+            "liuchengxu/vista.vim",
+            config = function()
+                require("conf.vista")
+            end
+        }
+
+        use {
+            "sindrets/diffview.nvim",
+            requires = {"nvim-lua/plenary.nvim"},
+            config = function ()
+                require("conf.diffview")
             end
         }
     end,
