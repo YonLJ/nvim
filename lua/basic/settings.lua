@@ -57,3 +57,4 @@ vim.o.foldlevel = 100
 -- 不开启换行
 vim.o.wrap = false
 
+vim.cmd.colorscheme "catppuccin-macchiato"
