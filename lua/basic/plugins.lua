@@ -5,17 +5,17 @@ packer.startup({
     -- 所有插件的安装都书写在 function 中
     function()
         -- 包管理器
-        use {"wbthomason/packer.nvim"}
+        use { "wbthomason/packer.nvim" }
 
         -- 中文文档
-        use {"yianwillis/vimcdoc"}
+        use { "yianwillis/vimcdoc" }
 
         -- nvim-tree
         use {
             "kyazdani42/nvim-tree.lua",
             requires = { -- 依赖一个图标插件
                 "kyazdani42/nvim-web-devicons"
-	    },
+            },
             config = function()
                 -- 插件加载完成后自动运行 lua/conf/nvim-tree.lua 文件中的代码
                 require("conf.nvim-tree")
@@ -49,27 +49,27 @@ packer.startup({
         use {
             "nvim-telescope/telescope.nvim",
             requires = {
-	        "nvim-lua/plenary.nvim", -- Lua 开发模块
+                "nvim-lua/plenary.nvim", -- Lua 开发模块
                 "BurntSushi/ripgrep", -- 文字查找
-                "sharkdp/fd" -- 文件查找
+                "sharkdp/fd"          -- 文件查找
             },
             config = function()
                 require("conf.telescope")
             end
         }
 
-    	-- 内置终端
-    	use {
-    	    "akinsho/toggleterm.nvim",
-    	    config=function()
-    	        require("conf.toggleterm")
-    	    end
-    	}
+        -- 内置终端
+        use {
+            "akinsho/toggleterm.nvim",
+            config = function()
+                require("conf.toggleterm")
+            end
+        }
 
-    	-- 支持 LSP 状态的 buffer 栏
+        -- 支持 LSP 状态的 buffer 栏
         use {
             "akinsho/bufferline.nvim",
-            requires = {"famiu/bufdelete.nvim" -- 删除 buffer 时不影响现有布局
+            requires = { "famiu/bufdelete.nvim" -- 删除 buffer 时不影响现有布局
             },
             config = function()
                 require("conf.bufferline")
@@ -107,20 +107,28 @@ packer.startup({
             end
         }
 
+        use {
+            'codota/tabnine-nvim',
+            run = "./dl_binaries.sh",
+            config = function()
+                require("conf.tabnine")
+            end
+        }
+
         -- 自动代码补全系列插件
         use {
-            "hrsh7th/nvim-cmp", -- 代码补全核心插件，下面都是增强补全的体验插件
+            "hrsh7th/nvim-cmp",                         -- 代码补全核心插件，下面都是增强补全的体验插件
             requires = {
-                {"onsails/lspkind-nvim"}, -- 为补全添加类似 vscode 的图标
-                {"hrsh7th/vim-vsnip"}, -- vsnip 引擎，用于获得代码片段支持
+                { "onsails/lspkind-nvim" },             -- 为补全添加类似 vscode 的图标
+                { "hrsh7th/vim-vsnip" },                -- vsnip 引擎，用于获得代码片段支持
                 -- {"hrsh7th/cmp-vsnip"}, -- 适用于 vsnip 的代码片段源
-                {"hrsh7th/cmp-nvim-lsp"}, -- 替换内置 omnifunc，获得更多补全
-                {"hrsh7th/cmp-path"}, -- 路径补全
-                {"hrsh7th/cmp-buffer"}, -- 缓冲区补全
-                {"hrsh7th/cmp-cmdline"}, -- 命令补全
-                {"f3fora/cmp-spell"}, -- 拼写建议
+                { "hrsh7th/cmp-nvim-lsp" },             -- 替换内置 omnifunc，获得更多补全
+                { "hrsh7th/cmp-path" },                 -- 路径补全
+                { "hrsh7th/cmp-buffer" },               -- 缓冲区补全
+                { "hrsh7th/cmp-cmdline" },              -- 命令补全
+                { "f3fora/cmp-spell" },                 -- 拼写建议
                 -- {"rafamadriz/friendly-snippets"}, -- 提供多种语言的代码片段
-                {"lukas-reineke/cmp-under-comparator"}, -- 让补全结果的排序更加智能
+                { "lukas-reineke/cmp-under-comparator" }, -- 让补全结果的排序更加智能
                 {
                     "tzachar/cmp-tabnine",
                     run = "./install.sh"
@@ -197,8 +205,8 @@ packer.startup({
 
         use {
             "sindrets/diffview.nvim",
-            requires = {"nvim-lua/plenary.nvim"},
-            config = function ()
+            requires = { "nvim-lua/plenary.nvim" },
+            config = function()
                 require("conf.diffview")
             end
         }

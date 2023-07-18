@@ -11,4 +11,3 @@ vim.cmd([[
 ]])
 
 vim.o.splitbelow = true
-
