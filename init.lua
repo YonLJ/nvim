@@ -2,5 +2,3 @@
 require("basic.settings")
 require("basic.keybinds")
 require("basic.plugins")
-require("basic.vimplug")
-

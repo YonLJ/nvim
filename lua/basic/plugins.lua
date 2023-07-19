@@ -22,13 +22,19 @@ packer.startup({
             end
         }
 
-        -- 主题
-        -- use {
-        --     "rebelot/kanagawa.nvim",
-        --     config = function()
-        --         require("conf.kanagawa")
-        --     end
-        -- }
+        use {
+            "~/vim-zui",
+            config = function()
+                vim.cmd([[
+                    autocmd BufRead,BufNewFile *.php setlocal completefunc=zui#complete
+                    autocmd BufRead,BufNewFile *.php setlocal completeopt=menu,menuone,preview,noinsert
+                    autocmd BufRead,BufNewFile *.php inoremap <C-f> <C-x><C-u>
+                    autocmd CompleteDone * pclose
+                ]])
+
+                vim.o.splitbelow = true
+            end
+        }
 
         use {
             "catppuccin/nvim",
@@ -50,8 +56,8 @@ packer.startup({
             "nvim-telescope/telescope.nvim",
             requires = {
                 "nvim-lua/plenary.nvim", -- Lua 开发模块
-                "BurntSushi/ripgrep", -- 文字查找
-                "sharkdp/fd"          -- 文件查找
+                "BurntSushi/ripgrep",    -- 文字查找
+                "sharkdp/fd"             -- 文件查找
             },
             config = function()
                 require("conf.telescope")
@@ -69,8 +75,7 @@ packer.startup({
         -- 支持 LSP 状态的 buffer 栏
         use {
             "akinsho/bufferline.nvim",
-            requires = { "famiu/bufdelete.nvim" -- 删除 buffer 时不影响现有布局
-            },
+            requires = { "famiu/bufdelete.nvim" }, -- 删除 buffer 时不影响现有布局
             config = function()
                 require("conf.bufferline")
             end
@@ -117,19 +122,20 @@ packer.startup({
 
         -- 自动代码补全系列插件
         use {
-            "hrsh7th/nvim-cmp",                         -- 代码补全核心插件，下面都是增强补全的体验插件
+            "hrsh7th/nvim-cmp",                           -- 代码补全核心插件，下面都是增强补全的体验插件
             requires = {
-                { "onsails/lspkind-nvim" },             -- 为补全添加类似 vscode 的图标
-                { "hrsh7th/vim-vsnip" },                -- vsnip 引擎，用于获得代码片段支持
+                { "onsails/lspkind-nvim" },               -- 为补全添加类似 vscode 的图标
+                { "hrsh7th/vim-vsnip" },                  -- vsnip 引擎，用于获得代码片段支持
                 -- {"hrsh7th/cmp-vsnip"}, -- 适用于 vsnip 的代码片段源
-                { "hrsh7th/cmp-nvim-lsp" },             -- 替换内置 omnifunc，获得更多补全
-                { "hrsh7th/cmp-path" },                 -- 路径补全
-                { "hrsh7th/cmp-buffer" },               -- 缓冲区补全
-                { "hrsh7th/cmp-cmdline" },              -- 命令补全
-                { "f3fora/cmp-spell" },                 -- 拼写建议
+                { "hrsh7th/cmp-nvim-lsp" },               -- 替换内置 omnifunc，获得更多补全
+                { "hrsh7th/cmp-path" },                   -- 路径补全
+                { "hrsh7th/cmp-buffer" },                 -- 缓冲区补全
+                { "hrsh7th/cmp-cmdline" },                -- 命令补全
+                { "f3fora/cmp-spell" },                   -- 拼写建议
                 -- {"rafamadriz/friendly-snippets"}, -- 提供多种语言的代码片段
                 { "lukas-reineke/cmp-under-comparator" }, -- 让补全结果的排序更加智能
                 {
+                    disable = true,
                     "tzachar/cmp-tabnine",
                     run = "./install.sh"
                 } -- tabnine 源,提供基于 AI 的智能补全
@@ -208,6 +214,19 @@ packer.startup({
             requires = { "nvim-lua/plenary.nvim" },
             config = function()
                 require("conf.diffview")
+            end
+        }
+
+        use {
+            "folke/which-key.nvim",
+            config = function()
+                vim.o.timeout = true
+                vim.o.timeoutlen = 300
+                require("which-key").setup {
+                    -- your configuration comes here
+                    -- or leave it empty to use the default settings
+                    -- refer to the configuration section below
+                }
             end
         }
     end,
